@@ -5,7 +5,7 @@ WORKDIR /build
 COPY go.mod ./
 COPY main.go ./
 
-RUN GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o bin/gohead
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o bin/gohead
 
 FROM scratch
 
@@ -15,4 +15,4 @@ COPY --from=buildo /build/bin/gohead /gohead
 
 EXPOSE 8080
 
-ENTRYPOINT [ "./gohead" ]
+CMD [ "./gohead" ]
