@@ -16,7 +16,6 @@ func headersHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "TransferEncoding: %s\n", r.TransferEncoding)
 	fmt.Fprintf(w, "Close: %t\n", r.Close)
 	fmt.Fprintf(w, "Trailer: %s\n", r.Trailer)
-	fmt.Fprintf(w, "RemoteAddr: %s\n", r.RemoteAddr)
 	fmt.Fprintf(w, "User Agent: %s\n", r.UserAgent())
 	fmt.Fprintf(w, "Remote Address: %s\n", r.RemoteAddr)
 
@@ -35,6 +34,7 @@ func headersHandler(w http.ResponseWriter, r *http.Request) {
 			fmt.Fprintf(w, "%s: %s\n", key, value)
 		}
 	}
+
 }
 
 func main() {
