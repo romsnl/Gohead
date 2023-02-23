@@ -6,11 +6,18 @@ Simple golang webapp serving http.Header
 
 ```sh
 ❯ curl 127.0.0.1:8080
-Method: GET
 Host: 127.0.0.1:8080
-Remote Address: 127.0.0.1:54013
+Method: GET
+URL: /
+Proto: HTTP/1.1
+ContentLength: 0
+TransferEncoding: []
+Close: false
+Trailer: map[]
+RemoteAddr: 172.17.0.1:57230
 User Agent: curl/7.86.0
-Request URI: /
+Remote Address: 172.17.0.1:57230
+
 Headers:
 Accept: */*
 User-Agent: curl/7.86.0
