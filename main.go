@@ -4,11 +4,20 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"sort"
 )
 
 func headersHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Host: %s\n", r.Host)
+	// If we are running in a Kubernetes cluster, print the pod name and namespace
+	if os.Getenv("POD_NAME") != "" {
+		fmt.Fprintln(w, "K8s Pod Info:")
+		fmt.Fprintf(w, "Served By: %s\n", os.Getenv("POD_NAME"))
+		fmt.Fprintf(w, "Namespace: %s\n", os.Getenv("POD_NAMESPACE"))
+	}
+
+	// Print the http request information
+	fmt.Fprintf(w, "\nHost: %s\n", r.Host)
 	fmt.Fprintf(w, "Method: %s\n", r.Method)
 	fmt.Fprintf(w, "URL: %s\n", r.URL)
 	fmt.Fprintf(w, "Proto: %s\n", r.Proto)
@@ -34,7 +43,6 @@ func headersHandler(w http.ResponseWriter, r *http.Request) {
 			fmt.Fprintf(w, "%s: %s\n", key, value)
 		}
 	}
-
 }
 
 func main() {
